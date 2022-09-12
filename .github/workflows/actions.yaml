@@ -5,4 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     container: gcr.io/config-management-release/nomos:stable
     steps:
-      - nomos vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
+      - name: nomos vet
+        with:
+          entrypoint: ""
+        run: nomos vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
