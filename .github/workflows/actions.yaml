@@ -2,6 +2,7 @@ name: solutions-validation
 on: [push]
 jobs:
   validate:
-    runs-on: gcr.io/config-management-release/nomos:stable
+    runs-on: ubuntu-latest
+    container: gcr.io/config-management-release/nomos:stable
     steps:
       - nomos vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
