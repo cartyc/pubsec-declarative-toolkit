@@ -4,9 +4,9 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     container: gcr.io/config-management-release/nomos:stable
+    uses: actions/checkout@v3
     steps:
       - name: nomos vet
-        uses: actions/checkout@v3
         with:
           entrypoint: ""
         run: |
