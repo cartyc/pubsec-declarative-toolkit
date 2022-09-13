@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: dir check
-        run: ls /home/runner/work/pubsec-declarative-toolkit/
+        run: ls -al ${{ github.workspace }}
   validate:
     runs-on: ubuntu-latest
     container: 
