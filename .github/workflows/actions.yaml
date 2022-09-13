@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: gcr.io/config-management-release/nomos:stable
-      options: --entrypoint "" -v ${{ github.workspace }}:/landing-zone
+      options: --entrypoint "" -v .:/landing-zone
     steps:
       - name: dir check
         uses: actions/checkout@v1
