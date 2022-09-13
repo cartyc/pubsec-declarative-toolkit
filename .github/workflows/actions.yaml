@@ -11,6 +11,8 @@ jobs:
     container: 
       image: gcr.io/config-management-release/nomos:stable
       options: --entrypoint ""
+      volumes:
+        - .:.
     steps:
       - name: dir check
         run: ls
