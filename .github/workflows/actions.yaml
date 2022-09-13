@@ -4,8 +4,10 @@ jobs:
   workspace:
     runs-on: ubuntu-latest
     steps:
-      - name: dir check
+      - name: checkout
         uses: actions/checkout@v1
+      - name: check
+        run: ls
   validate:
     runs-on: ubuntu-latest
     container: 
