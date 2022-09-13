@@ -15,8 +15,6 @@ jobs:
       options: --entrypoint ""
     steps:
       - name: dir check
-        uses: actions/checkout@v1
-      - name: dir check
         run: ls
       - name: nomos vet
         run: |
