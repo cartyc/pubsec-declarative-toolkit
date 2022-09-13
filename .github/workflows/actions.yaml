@@ -3,10 +3,11 @@ on: [push]
 jobs:
   validate:
     runs-on: ubuntu-latest
-    container: gcr.io/config-management-release/nomos:stable
+    container: 
+      image: gcr.io/config-management-release/nomos:stable
+      options:
+          entrypoint: ""
     steps:
       - name: nomos vet
-        options:
-          entrypoint: ""
         run: |
           nomos vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
