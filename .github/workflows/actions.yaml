@@ -7,6 +7,8 @@ jobs:
       image: gcr.io/config-management-release/nomos:stable
       options: --entrypoint ""
     steps:
+      - name: dir check
+        run: ls
       - name: nomos vet
         run: |
           nomos vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
