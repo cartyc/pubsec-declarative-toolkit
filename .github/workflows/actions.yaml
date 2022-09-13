@@ -11,8 +11,6 @@ jobs:
     container: 
       image: gcr.io/config-management-release/nomos:stable
       options: --entrypoint "" -v ${{ github.workspace }}:/landing-zone
-      volumes:
-        - ${{ github.workspace }}:./landing-zone/.
     steps:
       - name: dir check
         run: ls
