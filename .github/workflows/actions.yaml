@@ -1,19 +1,27 @@
 name: solutions-validation
 on: [push]
 jobs:
-  validate:
+  render:
     runs-on: ubuntu-latest
-    # container: 
-    #   image: gcr.io/config-management-release/nomos:stable
-    #   options: --entrypoint ""
     steps:
-      - name: checkout
-        uses: actions/checkout@v1    
-      - name: dir check
-        run: ls
-      - name: kpt fn
+      - name: kpt fn render
         run: |
           docker run -v $PWD:/app -v /var/run/docker.sock:/var/run/docker.sock gcr.io/kpt-dev/kpt:v1.0.0-beta.19 fn render /app/solutions/landing-zone
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: lz-render
+          path: /app/solutions
+          retention-days: 1
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: lz-render
+      - name: dir check
+        run: ls
       - name: nomos vet
         run: |
           docker run -v $PWD:/landing-zone gcr.io/config-management-release/nomos:stable nomos vet --no-api-server-check --source-format unstructured --path /landing-zone/solutions/landing-zone/environments
