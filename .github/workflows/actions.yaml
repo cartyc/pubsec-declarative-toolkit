@@ -11,7 +11,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: lz-render
-          path: /app/solutions
+          path: ./solutions
           retention-days: 1
   validate:
     runs-on: ubuntu-latest
