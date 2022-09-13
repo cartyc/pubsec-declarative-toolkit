@@ -5,8 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: gcr.io/config-management-release/nomos:stable
-      options:
-          entrypoint: ""
+      options: --entrypoint ""
     steps:
       - name: nomos vet
         run: |
