@@ -6,7 +6,7 @@ jobs:
     container: gcr.io/config-management-release/nomos:stable
     steps:
       - name: nomos vet
-        with:
+        options:
           entrypoint: ""
         run: |
           nomos vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
