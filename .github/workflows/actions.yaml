@@ -1,31 +1,17 @@
 name: solutions-validation
 on: [push]
 jobs:
-  workspace:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v1
-      - name: check
-        run: ls
-      - uses: actions/upload-artifact@v2
-        with:
-          name: landing-zone
-          path: ./solutions
   validate:
     runs-on: ubuntu-latest
     needs: workspace
-    container: 
-      image: gcr.io/config-management-release/nomos:stable
-      options: --entrypoint ""
+    # container: 
+    #   image: gcr.io/config-management-release/nomos:stable
+    #   options: --entrypoint ""
     steps:
       - name: checkout
         uses: actions/checkout@v1    
       - name: dir check
         run: ls
-      - uses: actions/download-artifact@v2
-        with:
-          name: landing-zone     
       - name: nomos vet
         run: |
-          nomos vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
+          docker run gcr.io/config-management-release/nomos:stable --entrypoint "" vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
