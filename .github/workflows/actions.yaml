@@ -13,4 +13,4 @@ jobs:
         run: ls
       - name: nomos vet
         run: |
-          docker run gcr.io/config-management-release/nomos:stable --entrypoint "" vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
+          docker run -v $PWD:/landing-zone gcr.io/config-management-release/nomos:stable nomos vet --no-api-server-check --source-format unstructured --path /landing-zone/solutions/landing-zone/environments
