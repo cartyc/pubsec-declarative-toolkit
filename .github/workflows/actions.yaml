@@ -20,4 +20,4 @@ jobs:
         run: ls
       - name: nomos vet
         run: |
-          nomos vet --no-api-server-check --source-format unstructured --path /landing-zone/solutions/landing-zone/environments
+          nomos vet --no-api-server-check --source-format unstructured --path solutions/landing-zone/environments
