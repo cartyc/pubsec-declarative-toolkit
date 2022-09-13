@@ -1,7 +1,10 @@
 name: solutions-validation
-on: [push]
+on:
+  push:
+    paths:
+      - solutions/landing-zone
 jobs:
-  solution-render:
+  solutions-render:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -15,9 +18,9 @@ jobs:
           name: lz-render
           path: ./solutions
           retention-days: 1
-  solution-validate:
+  solutions-validate:
     runs-on: ubuntu-latest
-    needs: solution-render
+    needs: solutions-render
     steps:
       - name: Download Solutions
         uses: actions/download-artifact@v3
