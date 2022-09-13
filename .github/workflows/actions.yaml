@@ -15,7 +15,7 @@ jobs:
       - name: dir check
         uses: actions/checkout@v1
       - name: dir check
-        run: ls /landing-zone
+        run: ls ${{ github.workspace }}
       - name: nomos vet
         run: |
           nomos vet --no-api-server-check --source-format unstructured --path /landing-zone/solutions/landing-zone/environments
