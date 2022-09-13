@@ -6,10 +6,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1  
-      - name: kpt fn render
+      - name: kpt fn render landing-zone
         run: |
           docker run -v $PWD:/app -v /var/run/docker.sock:/var/run/docker.sock gcr.io/kpt-dev/kpt:v1.0.0-beta.19 fn render /app/solutions/landing-zone
-      - name: 'Upload Artifact'
+      - name: 'Upload Solution Artifact'
         uses: actions/upload-artifact@v3
         with:
           name: lz-render
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: solution-render
     steps:
-      - name: Download a single artifact
+      - name: Download Solutions
         uses: actions/download-artifact@v3
         with:
           name: lz-render
