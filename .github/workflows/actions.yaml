@@ -2,7 +2,7 @@ name: solutions-validation
 on:
   push:
     paths:
-      - 'solutions/landing-zone/**'
+      - solutions/landing-zone/**
 jobs:
   solutions-render:
     runs-on: ubuntu-latest
