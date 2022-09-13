@@ -7,7 +7,7 @@ If you are not the following resources are required.
 * [Google Cloud SDK version >= 325.0.0](https://cloud.google.com/sdk/docs/downloads-versioned-archives)
 * [kpt](https://kpt.dev/installation/)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/) ( >= v1.20)
-
+asdasdsa
 1. Set environment variables that match your environment
 ```
 CLUSTER=<cluster-name>

@@ -1,4 +1,4 @@
-name: solutions-validation
+name: landing-zone-validation
 on:
   push:
     paths:
