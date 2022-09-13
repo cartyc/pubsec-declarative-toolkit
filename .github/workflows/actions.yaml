@@ -1,6 +1,11 @@
 name: solutions-validation
 on: [push]
 jobs:
+  workspace:
+    runs-on: ubuntu-latest
+    steps:
+      - name: dir check
+        run: ls
   validate:
     runs-on: ubuntu-latest
     container: 
