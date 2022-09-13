@@ -13,6 +13,8 @@ jobs:
       options: --entrypoint "" -v ${{ github.workspace }}:/landing-zone
     steps:
       - name: dir check
+        uses: actions/checkout@v1
+      - name: dir check
         run: ls /landing-zone
       - name: nomos vet
         run: |
