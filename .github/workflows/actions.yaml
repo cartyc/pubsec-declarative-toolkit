@@ -6,7 +6,6 @@ jobs:
     steps:
       - name: dir check
         uses: actions/checkout@v1
-        run: ls -al ${{ github.workspace }}
   validate:
     runs-on: ubuntu-latest
     container: 
