@@ -12,10 +12,10 @@ jobs:
       image: gcr.io/config-management-release/nomos:stable
       options: --entrypoint ""
       volumes:
-        - ${{ github.workspace }}:/landing-zone/.
+        - ${{ github.workspace }}:./landing-zone/.
     steps:
       - name: dir check
         run: ls
       - name: nomos vet
         run: |
-          nomos vet --no-api-server-check --source-format unstructured --path ${{ github.workspace }}/solutions/landing-zone/environments
+          nomos vet --no-api-server-check --source-format unstructured --path ./landing-zone/solutions/landing-zone/environments
