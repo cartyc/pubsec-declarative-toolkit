@@ -12,7 +12,7 @@ jobs:
       image: gcr.io/config-management-release/nomos:stable
       options: --entrypoint ""
       volumes:
-        - ${{ github.workspace }}:.
+        - ${{ github.workspace }}:/.
     steps:
       - name: dir check
         run: ls
