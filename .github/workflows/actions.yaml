@@ -3,7 +3,6 @@ on: [push]
 jobs:
   validate:
     runs-on: ubuntu-latest
-    needs: workspace
     # container: 
     #   image: gcr.io/config-management-release/nomos:stable
     #   options: --entrypoint ""
