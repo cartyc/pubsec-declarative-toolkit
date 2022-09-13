@@ -13,8 +13,7 @@ jobs:
         run: ls
       - name: kpt fn
         run: |
-          docker run -v $PWD:/app -v /var/run/docker.sock:/var/run/docker.sock gcr.io/kpt-dev/kpt:v1.0.0-beta.19
-        fn render /app
+          docker run -v $PWD:/app -v /var/run/docker.sock:/var/run/docker.sock gcr.io/kpt-dev/kpt:v1.0.0-beta.19 fn render /app
       - name: nomos vet
         run: |
           docker run -v $PWD:/landing-zone gcr.io/config-management-release/nomos:stable nomos vet --no-api-server-check --source-format unstructured --path /landing-zone/solutions/landing-zone/environments
