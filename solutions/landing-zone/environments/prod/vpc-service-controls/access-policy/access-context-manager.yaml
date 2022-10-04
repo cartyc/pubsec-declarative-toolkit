@@ -14,7 +14,7 @@
 ---
 apiVersion: accesscontextmanager.cnrm.cloud.google.com/v1beta1
 kind: AccessContextManagerAccessLevel
-metadata: # kpt-merge: prod/serviceperimeterdep1
+metadata:
   annotations:
     # Replace "${ORG_ID?}" with the numeric ID for your organization
     cnrm.cloud.google.com/organization-id: '0000000000000' # kpt-set: ${org-id}
