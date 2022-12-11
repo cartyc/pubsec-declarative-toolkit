@@ -1,3 +1,4 @@
 *.log
 configconnector.yaml
 restrictVpcPeering.yaml
+.DS_Store
