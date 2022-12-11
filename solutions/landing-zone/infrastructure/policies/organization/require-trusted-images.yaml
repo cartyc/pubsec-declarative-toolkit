@@ -1,0 +1,26 @@
+#########
+#
+# Constraint: constraints/compute.trustedImageProjects
+# This list constraint defines the set of projects that can be used for image storage and disk instantiation for Compute Engine.
+# https://cloud.google.com/compute/docs/images/restricting-image-access
+#
+# List public images: gcloud compute images list
+#########
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: ResourceManagerPolicy
+metadata: 
+  name: require-trusted-images
+  namespace: config-control # kpt-set: ${management-namespace}
+  labels:
+    guardrail: "false"
+spec:
+  constraint: "constraints/compute.trustedImageProjects"
+  listPolicy:
+    allow:
+      all: true # set to false to enable
+      values: # kpt-set: ${allowed-images}
+        - "projects/debian-cloud"
+        - "projects/cos-cloud"
+  organizationRef:
+    # Replace "${ORG_ID?}" with the numeric ID for your organization
+    external: "0000000000" # kpt-set: ${org-id}   
