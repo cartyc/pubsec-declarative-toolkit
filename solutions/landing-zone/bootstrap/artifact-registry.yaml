@@ -1,0 +1,12 @@
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  name: landing-zone
+  namespace: config-control
+  annotations:
+    cnrm.cloud.google.com/project-id: ${management-project-id} # kpt-set: ${management-project-id}
+  labels:
+    solution: landing-zone-bootstrap
+spec:
+  format: DOCKER
+  location: northamerica-northeast1
