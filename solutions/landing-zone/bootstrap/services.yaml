@@ -1,0 +1,51 @@
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: bootstrap-artifactregistry
+  namespace: config-control
+  annotations:
+    cnrm.cloud.google.com/deletion-policy: 'false'
+    cnrm.cloud.google.com/disable-dependent-services: 'false'
+spec:
+  resourceID: artifactregistry.googleapis.com
+  projectRef:
+    external: ${management-project-id} # kpt-set: ${management-project-id}
+---
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: bootstrap-cloudbuild
+  namespace: config-control
+  annotations:
+    cnrm.cloud.google.com/deletion-policy: 'false'
+    cnrm.cloud.google.com/disable-dependent-services: 'false'
+spec:
+  resourceID: cloudbuild.googleapis.com
+  projectRef:
+    external: ${management-project-id} # kpt-set: ${management-project-id}
+---
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: bootstrap-cloudkms
+  namespace: config-control
+  annotations:
+    cnrm.cloud.google.com/deletion-policy: 'false'
+    cnrm.cloud.google.com/disable-dependent-services: 'false'
+spec:
+  resourceID: cloudkms.googleapis.com
+  projectRef:
+    external: ${management-project-id} # kpt-set: ${management-project-id}
+---
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: bootstrap-sourcerepo
+  namespace: config-control
+  annotations:
+    cnrm.cloud.google.com/deletion-policy: 'false'
+    cnrm.cloud.google.com/disable-dependent-services: 'false'
+spec:
+  resourceID: sourcerepo.googleapis.com
+  projectRef:
+    external: ${management-project-id} # kpt-set: ${management-project-id}
