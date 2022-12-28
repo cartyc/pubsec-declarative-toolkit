@@ -1,5 +1,8 @@
 {
     "packages": {
-      "solutions/landing-zone": "0.0.1"
+      "solutions/landing-zone": {
+        "package-name": "landing-zone",
+        "changelog-path": "CHANGELOG.md"
+      }
     }
-  }
+}
