@@ -4,5 +4,7 @@
         "package-name": "landing-zone",
         "changelog-path": "CHANGELOG.md"
       }
-    }
+    },
+    "release-type": "krm-blueprint",
+    "bump-minor-pre-major": true
 }
