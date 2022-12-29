@@ -5,6 +5,7 @@
         "changelog-path": "CHANGELOG.md"
       }
     },
+    "bootstrap-sha": "0b07aad5fb7693dcffe8bcb62a6f68ed1cf6414f",
     "release-type": "krm-blueprint",
     "bump-minor-pre-major": true
 }
