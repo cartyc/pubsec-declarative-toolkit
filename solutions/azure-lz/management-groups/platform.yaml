@@ -1,0 +1,37 @@
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: identity
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/platform
+spec:
+  forProvider:
+    displayName: "PlatformIdentity"
+    parentManagementGroupIdRef:
+      name: platform
+---
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: connectivity
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/platform
+spec:
+  forProvider:
+    displayName: "PlatformConnectivity"
+    parentManagementGroupIdRef:
+      name: platform
+---
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: management
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/platform
+spec:
+  forProvider:
+    displayName: "PlatformManagement"
+    parentManagementGroupIdRef:
+      name: platform

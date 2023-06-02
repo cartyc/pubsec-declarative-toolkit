@@ -1,0 +1,25 @@
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-auth
+  name: deny-azure-bastion
+spec:
+  forProvider:
+    displayName: "Deny Azure Bastion Hosts resource creation"
+    mode: indexed
+    policyRule: |
+      	{
+          "if": {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Network/bastionHosts"
+              }
+            ]
+          },
+          "then": {
+            "effect": "deny"
+          }
+        }
+    policyType: Custom

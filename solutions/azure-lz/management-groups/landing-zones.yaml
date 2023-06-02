@@ -1,0 +1,64 @@
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: corp
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/landing-zones
+spec:
+  forProvider:
+    displayName: "LandingZonesCorp"
+    parentManagementGroupIdRef:
+      name: landing-zones
+---
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: online
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/landing-zones
+spec:
+  forProvider:
+    displayName: "LandingZonesOnline"
+    parentManagementGroupIdRef:
+      name: landing-zones
+---
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: dev-test
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/landing-zones
+spec:
+  forProvider:
+    displayName: "LandingZonesDevTest"
+    parentManagementGroupIdRef:
+      name: landing-zones
+---
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: qa
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/landing-zones
+spec:
+  forProvider:
+    displayName: "LandingZonesQA"
+    parentManagementGroupIdRef:
+      name: landing-zones
+---
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: prod
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/landing-zones
+spec:
+  forProvider:
+    displayName: "LandingZonesProd"
+    parentManagementGroupIdRef:
+      name: landing-zones

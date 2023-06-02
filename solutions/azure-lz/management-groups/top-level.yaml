@@ -1,0 +1,38 @@
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: platform
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/top-level
+spec:
+  forProvider:
+    displayName: "Platform"
+    parentManagementGroupIdRef:
+      name: top-level
+---
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: landing-zones
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/top-level
+spec:
+  forProvider:
+    displayName: "Landing Zones"
+    parentManagementGroupIdRef:
+      name: top-level
+---
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: sandbox
+  namespace: azure-lz
+  annotations:
+    config.kubernetes.io/depends-on: management.azure.upbound.io/namespaces/azure-lz/ManagementGroup/top-level
+spec:
+  forProvider:
+    displayName: "Sandbox"
+    parentManagementGroupIdRef:
+      name: top-level

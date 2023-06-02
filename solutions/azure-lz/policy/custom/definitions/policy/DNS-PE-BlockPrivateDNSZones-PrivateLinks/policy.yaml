@@ -1,0 +1,29 @@
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-auth
+  name: deny-azure-bastion
+spec:
+  forProvider:
+    displayName: "DNS - Deny privatelinks Private DNS Zones"
+    mode: indexed
+    policyRule: |
+      	{
+          "if": {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Network/privateDnsZones"
+              },
+              {
+                "field": "name",
+                "contains": "privatelink."
+              }
+            ]
+          },
+          "then": {
+            "effect": "Deny"
+          }
+        }
+    policyType: Custom

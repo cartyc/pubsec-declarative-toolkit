@@ -1,0 +1,9 @@
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  name: top-level
+  namespace: azure-lz
+spec:
+  forProvider:
+    displayName: "Top Level"
+---
