@@ -1,7 +1,7 @@
 # azure-lz
 
 ## Description
-sample description
+Example deployment of Azure LZ Resources using crossplane. Demo purposes only.
 
 ## Usage
 
