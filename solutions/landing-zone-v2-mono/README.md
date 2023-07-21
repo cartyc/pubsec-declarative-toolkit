@@ -1,7 +1,9 @@
 # landing-zone-v2-mono
 
 ## Description
-sample description
+Mono-Repo LZ. Contains the following packages
+- Gatekeeper-Policies
+- Core-Landing-Zone
 
 ## Usage
 
