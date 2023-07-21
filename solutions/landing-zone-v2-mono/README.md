@@ -2,8 +2,8 @@
 
 ## Description
 Mono-Repo LZ. Contains the following packages
-- Gatekeeper-Policies
-- Core-Landing-Zone
+- Gatekeeper-Policies v0.2.0
+- Core-Landing-Zone v0.3.1
 
 ## Usage
 
