@@ -23,6 +23,8 @@
     - [GKE Standard](#gke-standard)
   - [2. Create your landing zone](#2-create-your-landing-zone)
     - [Fetch the packages](#fetch-the-packages)
+    - [Experimentation](#experimentation)
+    - [Development and Production](#development-and-production)
   - [3. Deploy the infrastructure using GitOps](#3-deploy-the-infrastructure-using-gitops)
     - [Create a new repository in your Repo Hosting Solution (Github, Gitlab or Azure Devops)](#create-a-new-repository-in-your-repo-hosting-solution-github-gitlab-or-azure-devops)
     - [ConfigSync](#configsync)
@@ -347,6 +349,14 @@ cd pbmm-landingzone
     kpt pkg get https://github.com/GoogleCloudPlatform/pubsec-declarative-toolkit.git/solutions/gatekeeper-policies@<VERSION>
     ```
 
+Available Environments
+- [Experimentation/Sandbox](#experimentation)
+- [Development and Production](#development-and-production)
+
+### Experimentation
+
+The experimentation/sandbox landing zone environment is a light weight Landing Zone that is design for sandbox and testing environments. This environment should not be used for Production or Protected Workloads and is targetted to meet [Canadian Cloud Usage Profile # 1](https://github.com/canada-ca/cloud-guardrails/blob/master/EN/00_Applicable-Scope.md#cloud-usage-profiles)
+
 1. Get the landing zone package
 
     - Experimentation
@@ -355,13 +365,29 @@ cd pbmm-landingzone
       kpt pkg get https://github.com/GoogleCloudPlatform/pubsec-declarative-toolkit.git/solutions/experimentation/core-landing-zone@<VERSION>
       ```
 
+### Development and Production
+
+The Core Landing Zone package is targeted to address the needs of greater than Experimentation and sandbox through to production workloads and meet [Canadian Cloud Usage Profile # 3](https://github.com/canada-ca/cloud-guardrails/blob/master/EN/00_Applicable-Scope.md#cloud-usage-profiles).
+
+This step will be repeated for each environment you create with the exception of Experimentation. Create a folder for each environment.
+
+```
+pbmm-landingzone
+- dev
+- preprod
+- prod
+```
+
+1. Get the landing zone package
+
+
     - DEV, PREPROD, PROD
 
       ```shell
       kpt pkg get https://github.com/GoogleCloudPlatform/pubsec-declarative-toolkit.git/solutions/core-landing-zone@<VERSION>
       ```
 
-1. Customize Packages
+2. Customize Packages
 
     Review and customize all packages `setters.yaml` with the unique configuration of your landing zone.
 
