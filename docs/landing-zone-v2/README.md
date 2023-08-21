@@ -6,6 +6,7 @@
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Implementation](#implementation)
+    - [Meeting Guardrails Compliance](#meeting-guardrails-compliance)
   - [Organization](#organization)
   - [Single GCP organization](#single-gcp-organization)
   - [Multiple GCP organizations](#multiple-gcp-organizations)
@@ -52,6 +53,23 @@ This Landing Zone v2 differentiates from the `solutions/landing-zone` mostly bec
 ## <a name='Implementation'></a>Implementation
 
 You may want to look at the [documentation](https://github.com/ssc-spc-ccoe-cei/gcp-documentation) published by **Shared Services Canada**, providing a good level of details on how they have implemented this landing zone solution to host workloads from any of the 43 departments of the Government of Canada.
+
+### <a name='Guardrails'></a>Meeting Guardrails Compliance
+
+| ID     | Cloud Guardrails     | Implementation |
+|---| --- | --- |
+| 1 | Protect root / global admins account | This can be enabled via [Cloud Identity](https://cloud.google.com/identity/solutions/enforce-mfa) or Azure AD |
+| 2 | Management of administrative privileges | |
+| 3 | Cloud console access | |
+| 4 | Enterprise monitoring accounts | |
+| 5 | Data location | Enforced by an [Organization Policy](../../solutions/core-landing-zone/org/org-policies/gcp-resource-locations.yaml) and via the Datalocation [Gatekeeper Policy](../../solutions/gatekeeper-policies/guardrails/05-data-location/constraint.yaml) |
+| 6 | Protection of data-at-rest | [Enabled By Default](https://github.com/canada-ca/cloud-guardrails-gcp/blob/main/guardrails/06-data-at-rest/guardrail-6-at-rest.md) |
+| 7 | Protection of data-in-transit | [Enabled by Default](https://github.com/canada-ca/cloud-guardrails-gcp/blob/main/guardrails/07-data-in-transit/guardrail-7-in-transit.md) |
+| 8 | Segment and separate | Implemented via folder structure under Clients Landing Zone via `nonp` and `pbmm` folders. This is implemeted withing the deployment of the landing zone design by using multiple Organizations or folder structures per [environment](../../docs/landing-zone-v2/README.md#organization) |
+| 9 | Network security services |  |
+| 10 | Cyber defense services | MOU with CCCS or via configuration of Security Command Center |
+| 11 | Logging and monitoring | Creation of Log Sinks and Logging Project |
+| 12 | Configuration of cloud marketplaces |  |
 
 ## <a name='Organization'></a>Organization
 
