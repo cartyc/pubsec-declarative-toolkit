@@ -1,0 +1,302 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#########
+# GCP SA
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMServiceAccount
+metadata: # kpt-merge: client-name-config-control/client-name-networking-sa
+  name: client-name-networking-sa # kpt-set: ${client-name}-networking-sa
+  namespace: client-name-config-control # kpt-set: ${client-name}-${management-namespace}
+  annotations:
+    cnrm.cloud.google.com/project-id: client-management-project-id # kpt-set: ${client-management-project-id}
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMServiceAccount|client-name-config-control|client-name-networking-sa'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  displayName: client-name-networking-sa # kpt-set: ${client-name}-networking-sa
+---
+# Grant GCP role Network Admin to GCP SA
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata: # kpt-merge: hierarchy/client-name-networking-sa-networkadmin-permissions
+  name: client-name-networking-sa-networkadmin-permissions # kpt-set: ${client-name}-networking-sa-networkadmin-permissions
+  namespace: hierarchy
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|hierarchy|client-name-networking-sa-networkadmin-permissions'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Folder
+    name: clients.client-name # kpt-set: clients.${client-name}
+  role: roles/compute.networkAdmin
+  member: "serviceAccount:client-name-networking-sa@client-management-project-id.iam.gserviceaccount.com" # kpt-set: serviceAccount:${client-name}-networking-sa@${client-management-project-id}.iam.gserviceaccount.com
+---
+# Grant GCP role Security Admin to GCP SA
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata: # kpt-merge: hierarchy/client-name-networking-sa-security-permissions
+  name: client-name-networking-sa-security-permissions # kpt-set: ${client-name}-networking-sa-security-permissions
+  namespace: hierarchy
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|hierarchy|client-name-networking-sa-security-permissions'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Folder
+    name: clients.client-name # kpt-set: clients.${client-name}
+  role: roles/compute.securityAdmin
+  member: "serviceAccount:client-name-networking-sa@client-management-project-id.iam.gserviceaccount.com" # kpt-set: serviceAccount:${client-name}-networking-sa@${client-management-project-id}.iam.gserviceaccount.com
+---
+# Grant GCP role DNS Admin to GCP SA
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata: # kpt-merge: hierarchy/client-name-networking-sa-dns-permissions
+  name: client-name-networking-sa-dns-permissions # kpt-set: ${client-name}-networking-sa-dns-permissions
+  namespace: hierarchy
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|hierarchy|client-name-networking-sa-dns-permissions'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Folder
+    name: clients.client-name # kpt-set: clients.${client-name}
+  role: roles/dns.admin
+  member: "serviceAccount:client-name-networking-sa@client-management-project-id.iam.gserviceaccount.com" # kpt-set: serviceAccount:${client-name}-networking-sa@${client-management-project-id}.iam.gserviceaccount.com
+---
+# Grant GCP role Tier2 DNS Record Admin to GCP SA on Core DNS Project
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata: # kpt-merge: projects/client-name-networking-sa-tier2-dns-record-admin-permission
+  name: client-name-networking-sa-tier2-dns-record-admin-permission # kpt-set: ${client-name}-networking-sa-tier2-dns-record-admin-permission
+  namespace: projects
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|projects|client-name-networking-sa-tier2-dns-record-admin-permission'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Project
+    name: dns-project-id # kpt-set: ${dns-project-id}
+  role: organizations/org-id/roles/tier2.dnsrecord.admin # kpt-set: organizations/${org-id}/roles/tier2.dnsrecord.admin
+  member: "serviceAccount:client-name-networking-sa@client-management-project-id.iam.gserviceaccount.com" # kpt-set: serviceAccount:${client-name}-networking-sa@${client-management-project-id}.iam.gserviceaccount.com
+---
+# Grant GCP role ACM Admin to GCP SA
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata: # kpt-merge: hierarchy/client-name-networking-sa-service-control-permissions
+  name: client-name-networking-sa-service-control-permissions # kpt-set: ${client-name}-networking-sa-service-control-permissions
+  namespace: hierarchy
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|hierarchy|client-name-networking-sa-service-control-permissions'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Folder
+    name: clients.client-name # kpt-set: clients.${client-name}
+  role: roles/accesscontextmanager.policyAdmin
+  member: "serviceAccount:client-name-networking-sa@client-management-project-id.iam.gserviceaccount.com" # kpt-set: serviceAccount:${client-name}-networking-sa@${client-management-project-id}.iam.gserviceaccount.com
+---
+# Grant GCP role Shared VPC Admin to GCP SA
+# needs to be set at the org level because of org policy "constraints/compute.restrictXpnProjectLienRemoval"
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata: # kpt-merge: config-control/client-name-networking-sa-xpnadmin-permissions
+  name: client-name-networking-sa-xpnadmin-permissions # kpt-set: ${client-name}-networking-sa-xpnadmin-permissions
+  namespace: config-control
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|config-control|client-name-networking-sa-xpnadmin-permissions'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Organization
+    external: "123456789012" # kpt-set: ${org-id}
+  role: roles/compute.xpnAdmin
+  member: "serviceAccount:client-name-networking-sa@client-management-project-id.iam.gserviceaccount.com" # kpt-set: serviceAccount:${client-name}-networking-sa@${client-management-project-id}.iam.gserviceaccount.com
+---
+# Grant GCP role Service Directory Editor to GCP SA
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata: # kpt-merge: hierarchy/client-name-networking-sa-servicedirectoryeditor-permissions
+  name: client-name-networking-sa-servicedirectoryeditor-permissions # kpt-set: ${client-name}-networking-sa-servicedirectoryeditor-permissions
+  namespace: hierarchy
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|hierarchy|client-name-networking-sa-servicedirectoryeditor-permissions'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Folder
+    name: clients.client-name # kpt-set: clients.${client-name}
+  role: roles/servicedirectory.editor
+  member: "serviceAccount:client-name-networking-sa@client-management-project-id.iam.gserviceaccount.com" # kpt-set: serviceAccount:${client-name}-networking-sa@${client-management-project-id}.iam.gserviceaccount.com
+---
+# Grant GCP role Compute Organization Resource Admin to GCP networking SA for fw policies
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata: # kpt-merge: hierarchy/client-name-networking-sa-client-folder-org-resource-admin-permissions
+  name: client-name-networking-sa-client-folder-org-resource-admin-permissions # kpt-set: ${client-name}-networking-sa-client-folder-org-resource-admin-permissions
+  namespace: hierarchy
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPolicyMember|hierarchy|client-name-networking-sa-client-folder-org-resource-admin-permissions'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Folder
+    name: clients.client-name # kpt-set: clients.${client-name}
+  role: roles/compute.orgSecurityResourceAdmin
+  member: serviceAccount:client-name-networking-sa@client-management-project-id.iam.gserviceaccount.com # kpt-set: serviceAccount:${client-name}-networking-sa@${client-management-project-id}.iam.gserviceaccount.com
+---
+# K8S SA
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPartialPolicy
+metadata: # kpt-merge: client-name-config-control/client-name-networking-sa-workload-identity-binding
+  name: client-name-networking-sa-workload-identity-binding # kpt-set: ${client-name}-networking-sa-workload-identity-binding
+  namespace: client-name-config-control # kpt-set: ${client-name}-${management-namespace}
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'iam.cnrm.cloud.google.com|IAMPartialPolicy|client-name-config-control|client-name-networking-sa-workload-identity-binding'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  resourceRef:
+    name: client-name-networking-sa # kpt-set: ${client-name}-networking-sa
+    apiVersion: iam.cnrm.cloud.google.com/v1beta1
+    kind: IAMServiceAccount
+  bindings:
+    - role: roles/iam.workloadIdentityUser
+      members:
+        - member: serviceAccount:management-project-id.svc.id.goog[cnrm-system/cnrm-controller-manager-client-name-networking] # kpt-set: serviceAccount:${management-project-id}.svc.id.goog[cnrm-system/cnrm-controller-manager-${client-name}-networking]
+---
+# K8S namespace
+apiVersion: v1
+kind: Namespace
+metadata: # kpt-merge: /client-name-networking
+  name: client-name-networking # kpt-set: ${client-name}-networking
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: '|Namespace|default|client-name-networking'
+---
+# Link GCP SA to K8S namespace
+apiVersion: core.cnrm.cloud.google.com/v1beta1
+kind: ConfigConnectorContext
+metadata: # kpt-merge: client-name-networking/configconnectorcontext.core.cnrm.cloud.google.com
+  name: configconnectorcontext.core.cnrm.cloud.google.com
+  namespace: client-name-networking # kpt-set: ${client-name}-networking
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'core.cnrm.cloud.google.com|ConfigConnectorContext|client-name-networking|configconnectorcontext.core.cnrm.cloud.google.com'
+    cnrm.cloud.google.com/blueprint: 'kpt-pkg'
+spec:
+  googleServiceAccount: client-name-networking-sa@client-management-project-id.iam.gserviceaccount.com # kpt-set: ${client-name}-networking-sa@${client-management-project-id}.iam.gserviceaccount.com
+---
+# Grant viewer role on the projects namespace to networking K8S SA
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: # kpt-merge: client-name-projects/allow-resource-reference-from-networking
+  name: allow-resource-reference-from-networking
+  namespace: client-name-projects # kpt-set: ${client-name}-projects
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|RoleBinding|client-name-projects|allow-resource-reference-from-networking'
+roleRef:
+  name: cnrm-viewer
+  kind: ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - name: cnrm-controller-manager-client-name-networking # kpt-set: cnrm-controller-manager-${client-name}-networking
+    namespace: cnrm-system
+    kind: ServiceAccount
+---
+# Grant viewer role on the networking namespace to client-name-networking K8S SA
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: # kpt-merge: networking/allow-resource-reference-from-client-name-networking
+  name: allow-resource-reference-from-client-name-networking # kpt-set: allow-resource-reference-from-${client-name}-networking
+  namespace: networking
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|RoleBinding|networking|allow-resource-reference-from-client-name-networking'
+roleRef:
+  name: cnrm-viewer
+  kind: ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - name: cnrm-controller-manager-client-name-networking # kpt-set: cnrm-controller-manager-${client-name}-networking
+    namespace: cnrm-system
+    kind: ServiceAccount
+---
+# Grant viewer role on the client-name-hierarchy namespace to client-name-networking K8S SA
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: # kpt-merge: client-name-hierarchy/allow-client-name-hierarchy-resource-reference-from-client-name-networking
+  name: allow-client-name-hierarchy-resource-reference-from-client-name-networking # kpt-set: allow-${client-name}-hierarchy-resource-reference-from-${client-name}-networking
+  namespace: client-name-hierarchy # kpt-set: ${client-name}-hierarchy
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|RoleBinding|client-name-hierarchy|allow-client-name-hierarchy-resource-reference-from-client-name-networking'
+roleRef:
+  name: cnrm-viewer
+  kind: ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - name: cnrm-controller-manager-client-name-networking # kpt-set: cnrm-controller-manager-${client-name}-networking
+    namespace: cnrm-system
+    kind: ServiceAccount
+---
+# Grant viewer role on the hierarchy namespace to client-name-networking K8S SA
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: # kpt-merge: hierarchy/allow-hierarchy-resource-reference-from-client-name-networking
+  name: allow-hierarchy-resource-reference-from-client-name-networking # kpt-set: allow-hierarchy-resource-reference-from-${client-name}-networking
+  namespace: hierarchy
+  annotations:
+    cnrm.cloud.google.com/ignore-clusterless: "true"
+    config.kubernetes.io/depends-on: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/client-management-project-id # kpt-set: resourcemanager.cnrm.cloud.google.com/namespaces/projects/Project/${client-management-project-id}
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|RoleBinding|hierarchy|allow-hierarchy-resource-reference-from-client-name-networking'
+roleRef:
+  name: cnrm-viewer
+  kind: ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - name: cnrm-controller-manager-client-name-networking # kpt-set: cnrm-controller-manager-${client-name}-networking
+    namespace: cnrm-system
+    kind: ServiceAccount
