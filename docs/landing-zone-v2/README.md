@@ -59,17 +59,17 @@ You may want to look at the [documentation](https://github.com/ssc-spc-ccoe-cei/
 | ID     | Cloud Guardrails     | Implementation |
 |---| --- | --- |
 | 1 | Protect root / global admins account | This can be enabled via [Cloud Identity](https://cloud.google.com/identity/solutions/enforce-mfa) or Azure AD |
-| 2 | Management of administrative privileges | |
-| 3 | Cloud console access | |
-| 4 | Enterprise monitoring accounts | |
+| 2 | Management of administrative privileges | The majority of this guardrail will be managed with existing Government of Canada identity provider (IdP). For Granting, changing, and revoking access to resources you can leverage Identity and Access Management (IAM) and details can be found here [Managing Roles and Permissions](https://cloud.google.com/iam/docs/granting-changing-revoking-access). Google Cloud security best practices [Security Best Pratices](https://cloud.google.com/security/best-practices) |
+| 3 | Cloud console access | This will be managed with existing Government of Canada identity provider (IdP). |
+| 4 | Enterprise monitoring accounts | This is provisioned as part of the core-landing-zone package |
 | 5 | Data location | Enforced by an [Organization Policy](../../solutions/core-landing-zone/org/org-policies/gcp-resource-locations.yaml) and via the Datalocation [Gatekeeper Policy](../../solutions/gatekeeper-policies/guardrails/05-data-location/constraint.yaml) |
 | 6 | Protection of data-at-rest | [Enabled By Default](https://github.com/canada-ca/cloud-guardrails-gcp/blob/main/guardrails/06-data-at-rest/guardrail-6-at-rest.md) |
 | 7 | Protection of data-in-transit | [Enabled by Default](https://github.com/canada-ca/cloud-guardrails-gcp/blob/main/guardrails/07-data-in-transit/guardrail-7-in-transit.md) |
 | 8 | Segment and separate | Implemented via folder structure under Clients Landing Zone via `nonp` and `pbmm` folders. This is implemeted withing the deployment of the landing zone design by using multiple Organizations or folder structures per [environment](../../docs/landing-zone-v2/README.md#organization) |
-| 9 | Network security services |  |
-| 10 | Cyber defense services | MOU with CCCS or via configuration of Security Command Center |
-| 11 | Logging and monitoring | Creation of Log Sinks and Logging Project |
-| 12 | Configuration of cloud marketplaces |  |
+| 9 | Network security services | Configuration of a Default Virtual Private Cloud and Firewalls are provisioned as part of the `client-landing-zone` [package](../../solutions/client-landing-zone/securitycontrols.md). |
+| 10 | Cyber defense services | MOU with CCCS or via configuration of Security Command Center. Instructions for enabling SCC can be found [here](https://cloud.google.com/security-command-center/docs/activate-scc-overview) |
+| 11 | Logging and monitoring | Creation of a [Logging Project](../../solutions/core-landing-zone/lz-folder/audits/logging-project/) in the `core-landing-zone` package and [logging bucket](../../solutions/client-landing-zone/logging-project/) in the `client-landing-zone` packages. |
+| 12 | Configuration of cloud marketplaces | Enforced via Organization [Policies](../../solutions/core-landing-zone/org/org-policies/) deployed in the `core-landing-zone` package |
 
 ## <a name='Organization'></a>Organization
 
