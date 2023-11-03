@@ -174,6 +174,91 @@ data:
     - "ns-cloud-a2.googledomains.com."
     - "ns-cloud-a3.googledomains.com."
     - "ns-cloud-a4.googledomains.com."
+  # CCCS Approved Services
+  cccs-services: |
+    - datastudio.googleapis.com
+    - contentwarehouse.googleapis.com
+    - automl.googleapis.com
+    - language.googleapis.com
+    - speech.googleapis.com
+    - jobs.googleapis.com
+    - translate.googleapis.com
+    - videointelligence.googleapis.com
+    - vision.googleapis.com
+    - dialogflow.googleapis.com
+    - aiplatform.googleapis.com
+    - apigee.googleapis.com
+    - apigeeconnect.googleapis.com
+    - apigeeregistry.googleapis.com
+    - endpoints.googleapis.com
+    - appengine.googleapis.com
+    - appengineflex.googleapis.com
+    - appenginereporting.googleapis.com
+    - compute.googleapis.com
+    - cloudfunctions.googleapis.com
+    - vpcaccess.googleapis.com
+    - bigquery.googleapis.com
+    - bigquerydatapolicy.googleapis.com
+    - bigqueryconnection.googleapis.com
+    - bigqueryreservation.googleapis.com
+    - bigquerystorage.googleapis.com
+    - bigquerymigration.googleapis.com
+    - lifesciences.googleapis.com
+    - dataflow.googleapis.com
+    - dataproc.googleapis.com
+    - pubsub.googleapis.com
+    - pubsublite.googleapis.com
+    - composer.googleapis.com
+    - datafusion.googleapis.com
+    - bigtabletableadmin.googleapis.com
+    - spanner.googleapis.com
+    - sql-component.googleapis.com
+    - sqladmin.googleapis.com
+    - firestore.googleapis.com
+    - redis.googleapis.com
+    - cloudbuild.googleapis.com
+    - sourcerepo.googleapis.com
+    - containerregistry.googleapis.com
+    - containerscanning.googleapis.com
+    - containersecurity.googleapis.com
+    - containerthreatdetection.googleapis.com
+    - containeranalysis.googleapis.com
+    - container.googleapis.com
+    - anthosconfigmanagement.googleapis.com
+    - anthos.googleapis.com
+    - anthospolicycontroller.googleapis.com
+    - mesh.googleapis.com
+    - gkehub.googleapis.com
+    - krmapihosting.googleapis.com
+    - cloudasset.googleapis.com
+    - cloudbilling.googleapis.com
+    - deploymentmanager.googleapis.com
+    - datacatalog.googleapis.com
+    - dns.googleapis.com
+    - networkservices.googleapis.com
+    - Network Intelligence Center
+    - trafficdirector.googleapis.com
+    - logging.googleapis.com
+    - monitoring.googleapis.com
+    - cloudprofiler.googleapis.com
+    - cloudtrace.googleapis.com
+    - accessapproval.googleapis.com
+    - accesscontextmanager.googleapis.com
+    - dlp.googleapis.com
+    - cloudkms.googleapis.com
+    - iap.googleapis.com
+    - cloudidentity.googleapis.com
+    - cloudresourcemanager.googleapis.com
+    - servicecontrol.googleapis.com 
+    - websecurityscanner.googleapis.com
+    - binaryauthorization.googleapis.com
+    - privateca.googleapis.com
+    - recaptchaenterprise.googleapis.com
+    - secretmanager.googleapis.com
+    - securitycenter.googleapis.com
+    - storage.googleapis.com
+    - datastream.googleapis.com
+    - eventarc.googleapis.com
   #
   ##########################
   # End of Configurations
